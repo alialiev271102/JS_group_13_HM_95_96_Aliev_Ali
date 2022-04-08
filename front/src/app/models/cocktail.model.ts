@@ -18,7 +18,7 @@ export interface CocktailData {
   title: string,
   recipe: string,
   isPublished: boolean,
-  ingredients: IngredientModel[],
+  ingredients: string,
   image: File | null,
 }
 

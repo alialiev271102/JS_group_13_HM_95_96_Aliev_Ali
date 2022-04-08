@@ -70,7 +70,7 @@ router.post('/', auth, permit('admin'), upload.single('image'), async (req, res,
             title: req.body.title,
             recipe: req.body.recipe,
             isPublished: false,
-            ingredients: req.body.ingredients,
+            ingredients: JSON.parse(req.body.ingredients),
             image: null,
         };
 

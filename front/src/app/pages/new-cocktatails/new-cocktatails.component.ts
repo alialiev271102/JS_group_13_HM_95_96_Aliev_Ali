@@ -62,6 +62,7 @@ export class NewCocktatailsComponent {
 
   onSubmit() {
     const cocktailData: CocktailData = this.profileForm.value;
+    cocktailData.ingredients = JSON.stringify(cocktailData.ingredients);
     cocktailData.creatorUserId = this.creatorUserId;
     this.store.dispatch(createCocktailRequest({cocktailData}));
   }
