@@ -31,13 +31,14 @@ import {RegisterComponent} from './pages/register/register.component';
 import {CenteredCardComponent} from './ui/centered-card/centered-card.component';
 import {AuthInterceptor} from "./auth.interceptor";
 import {environment} from "../environments/environment";
-import { CocktatailsComponent } from './pages/cocktatails/cocktatails.component';
-import { NewCocktatailsComponent } from './pages/new-cocktatails/new-cocktatails.component';
-import { MyCocktatailsComponent } from './pages/my-cocktatails/my-cocktatails.component';
+import {CocktatailsComponent} from './pages/cocktatails/cocktatails.component';
+import {NewCocktatailsComponent} from './pages/new-cocktatails/new-cocktatails.component';
 import {ImagePipe} from "./pipes/image.pipe";
-import { OneCocktailComponent } from './pages/cocktatails/one-cocktail/one-cocktail.component';
-import { IsPublishedDirective } from './directives/is-published.directive';
+import {OneCocktailComponent} from './pages/cocktatails/one-cocktail/one-cocktail.component';
+import {IsPublishedDirective} from './directives/is-published.directive';
 import {AvatarPipe} from "./pipes/avatar.pipe";
+import {DeleteDirective} from "./directives/delete.directive";
+import {MyCocktailsComponent} from './pages/my-cocktails/my-cocktails.component';
 
 const socialConfig: SocialAuthServiceConfig = {
   autoLogin: false,
@@ -59,13 +60,14 @@ const socialConfig: SocialAuthServiceConfig = {
     CenteredCardComponent,
     CocktatailsComponent,
     NewCocktatailsComponent,
-    MyCocktatailsComponent,
     ImagePipe,
     AvatarPipe,
     OneCocktailComponent,
     UserTypeDirective,
     HasRolesDirective,
-    IsPublishedDirective
+    IsPublishedDirective,
+    DeleteDirective,
+    MyCocktailsComponent
   ],
   imports: [
     BrowserModule,

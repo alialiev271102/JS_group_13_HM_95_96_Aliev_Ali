@@ -12,7 +12,7 @@ import {logoutUserRequest} from '../../store/users.actions';
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.css']
 })
-export class LayoutComponent implements OnInit{
+export class LayoutComponent {
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -27,12 +27,6 @@ export class LayoutComponent implements OnInit{
     private store: Store<AppState>
   ) {
       this.user = store.select(state => state.users.user);
-  }
-
-  ngOnInit() {
-    this.user.subscribe(user => {
-      console.log(user?.avatar);
-    })
   }
 
   logout() {

@@ -5,6 +5,7 @@ import {RegisterComponent} from "./pages/register/register.component";
 import {CocktatailsComponent} from "./pages/cocktatails/cocktatails.component";
 import {NewCocktatailsComponent} from "./pages/new-cocktatails/new-cocktatails.component";
 import {OneCocktailComponent} from "./pages/cocktatails/one-cocktail/one-cocktail.component";
+import {MyCocktailsComponent} from "./pages/my-cocktails/my-cocktails.component";
 
 const routes: Routes = [
   {path: '', component: CocktatailsComponent},
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'cocktail', component: CocktatailsComponent},
   {path: 'cocktail/new', component: NewCocktatailsComponent},
+  {path: 'cocktail/myCocktails', component: MyCocktailsComponent},
   {path: 'cocktail/:id', component: OneCocktailComponent},
 ];
 

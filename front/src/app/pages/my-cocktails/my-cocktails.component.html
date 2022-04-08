@@ -1,0 +1,48 @@
+<div fxLayout="row" fxLayoutAlign="space-between flex-start">
+  <h1>Cocktails</h1>
+  <a
+    routerLink="/cocktail/new"
+    mat-button
+    *appHasRoles="['admin','user']"
+  >NEW COCKTAIL</a>
+</div>
+
+<div class="error" *ngIf="error | async">
+  {{ error | async }}
+</div>
+
+<mat-progress-spinner
+  *ngIf="(loading | async) else cocktailsArea"
+  mode="indeterminate"
+></mat-progress-spinner>
+
+<ng-template #cocktailsArea>
+  <div fxLayout="row wrap" fxLayoutGap="16px grid" >
+    <div
+      fxFlex.xs="100%"
+      fxFlex.sm="50%"
+      fxFlex.lt-lg="33%"
+      fxFlex="25%"
+      *ngFor="let cocktail of cocktails | async"
+    >
+      <mat-card *appIsPublished="cocktail">
+        <mat-card-title>{{ cocktail.title }}</mat-card-title>
+        <img
+          [src]="cocktail.image | image"
+          [alt]="'Photo of ' + cocktail.title"
+          mat-card-image
+        />
+        <mat-card-content>
+          <p>Recipe: {{ cocktail.recipe }}</p>
+        </mat-card-content>
+        <mat-divider></mat-divider>
+        <mat-card-actions>
+          <a
+            [routerLink]="['/cocktail/', cocktail.id]"
+            mat-button
+          >VIEW</a>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</ng-template>

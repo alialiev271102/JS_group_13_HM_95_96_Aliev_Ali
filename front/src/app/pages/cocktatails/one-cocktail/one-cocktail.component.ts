@@ -20,6 +20,7 @@ export class OneCocktailComponent implements OnInit, OnDestroy {
   loading: Observable<boolean>;
   error: Observable<null | string>;
   id!: string;
+  flag!: boolean
 
   constructor(
     private route: ActivatedRoute,
@@ -35,6 +36,7 @@ export class OneCocktailComponent implements OnInit, OnDestroy {
     this.route.params.subscribe(params => {
       this.id = params['id'];
     })
+    this.flag = false;
 
     const sss = this.http.get<Cocktail>(environment.apiUrl + '/cocktails/' + this.id);
     sss.subscribe(sss => {
@@ -45,12 +47,14 @@ export class OneCocktailComponent implements OnInit, OnDestroy {
   }
 
   OnDelete() {
-    this.deleteSub = this.http.delete(environment.apiUrl + '/cocktails/' + this.id).subscribe();
-    this.router.navigate(['/cocktail']);
+    this.deleteSub = this.http.delete(environment.apiUrl + '/cocktails/' + this.id).subscribe(() => {
+      this.flag = true;
+    });
+    void this.router.navigate(['/cocktail']);
   }
 
   ngOnDestroy() {
-    this.deleteSub.unsubscribe();
+    if (this.flag)this.deleteSub.unsubscribe();
   }
 
 

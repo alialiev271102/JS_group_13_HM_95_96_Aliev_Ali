@@ -2,12 +2,11 @@ const path = require('path');
 const fs = require("fs").promises;
 const express = require('express');
 const multer = require('multer');
-const { nanoid } = require('nanoid');
+const {nanoid} = require('nanoid');
 const config = require('../config');
 const Cocktail = require("../models/Cocktail");
 const mongoose = require("mongoose");
 const auth = require("../middleware/auth");
-const permit = require("../middleware/permit");
 const User = require("../models/User");
 
 
@@ -45,6 +44,18 @@ router.get('/', async (req, res, next) => {
     }
 });
 
+router.get('/myCocktails', async (req, res, next) => {
+    try{
+        const query = req.query.creatorUserId;
+        console.log(query);
+        const cocktails = await Cocktail.find({creatorUserId: query});
+        return res.send(cocktails);
+    }catch (e) {
+        next(e);
+    }
+
+});
+
 router.get('/:id', async (req, res, next) => {
     try {
         const cocktail = await Cocktail.findById(req.params.id);
@@ -61,7 +72,6 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', auth, upload.single('image'), async (req, res, next) => {
     try {
-        console.log('yrdhfjghyiudgx');
         if (!req.body.title || !req.body.recipe || !req.body.ingredients) {
             return res.status(400).send({message: 'Title, recipe and ingredients are required'});
         }
@@ -106,7 +116,7 @@ router.delete('/:id', async (req, res, next) => {
 
         if (!user) return res.send(message);
 
-        const cocktail = await Cocktail.deleteOne({ _id: req.params.id });
+        const cocktail = await Cocktail.deleteOne({_id: req.params.id});
         if (!cocktail) {
             return res.status(404).send({message: 'Not found'});
         }
