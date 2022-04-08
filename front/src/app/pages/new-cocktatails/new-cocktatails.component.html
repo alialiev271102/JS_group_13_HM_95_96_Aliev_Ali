@@ -4,51 +4,47 @@
     <div class="error" *ngIf="error | async">
       {{ error | async }}
     </div>
-    <form (ngSubmit)="onSubmit()" #f="ngForm" fxLayout="column">
+    <form (ngSubmit)="onSubmit()" #f="ngForm" fxLayout="column" [formGroup]="profileForm">
       <mat-form-field appearance="outline">
         <mat-label>Title</mat-label>
-        <input name="title" required matInput ngModel/>
+        <input name="title" formControlName="title" id="title" required matInput/>
       </mat-form-field>
-
       <div
-        [formGroup]="profileForm">
-        <div
-          class="form-group"
-          formArrayName="ingredients"
-        >
-          <mat-label>Ingredients</mat-label>
-          <button
-            type="button"
-            class="mat-select"
-            (click)="addIng()"
-            mat-raised-button
-          >Add ingredients
-          </button>
-          <div *ngFor="let _ of getIngControls(); let i = index">
-            <div [formGroupName]="i">
-              <mat-form-field appearance="outline">
-                <mat-label>Name</mat-label>
-                <input
-                  type="text"
-                  formControlName="name"
-                  id="name"
-                  name="name"
-                  required
-                  matInput
-                />
-              </mat-form-field>
-              <mat-form-field appearance="outline" style="margin-left: 10px">
-                <mat-label>Amount</mat-label>
-                <input
-                  type="text"
-                  formControlName="amount"
-                  id="amount"
-                  name="amount"
-                  required
-                  matInput
-                />
-              </mat-form-field>
-            </div>
+        class="form-group"
+        formArrayName="ingredients"
+      >
+        <mat-label>Ingredients</mat-label>
+        <button
+          type="button"
+          class="mat-select"
+          (click)="addIng()"
+          mat-raised-button
+        >Add ingredients
+        </button>
+        <div *ngFor="let _ of getIngControls(); let i = index">
+          <div [formGroupName]="i">
+            <mat-form-field appearance="outline">
+              <mat-label>Name</mat-label>
+              <input
+                type="text"
+                formControlName="name"
+                id="name"
+                name="name"
+                required
+                matInput
+              />
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="margin-left: 10px">
+              <mat-label>Amount</mat-label>
+              <input
+                type="number"
+                formControlName="amount"
+                id="amount"
+                name="amount"
+                required
+                matInput
+              />
+            </mat-form-field>
           </div>
         </div>
       </div>
@@ -57,14 +53,15 @@
         <mat-label>Recipe</mat-label>
         <input
           type="textarea"
-          name="price"
+          name="recipe"
+          id="recipe"
+          formControlName="recipe"
           required
-          ngModel
           matInput/>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Image</mat-label>
-        <app-file-input name="image" ngModel></app-file-input>
+        <app-file-input name="image" formControlName="image" id="image"></app-file-input>
       </mat-form-field>
       <div>
         <button

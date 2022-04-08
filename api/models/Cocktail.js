@@ -8,7 +8,7 @@ const imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
 
 const ingredient = {
     name: String,
-    amount: Number
+    amount: Number,
 }
 
 const CocktailSchema = new Schema({

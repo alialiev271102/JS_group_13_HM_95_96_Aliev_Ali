@@ -11,7 +11,7 @@ export type UsersState = {
 }
 
 export type CocktailState = {
-  cocktails: Cocktail[],
+  cocktail: Cocktail[],
   fetchLoading: boolean,
   fetchError: null | string,
   createLoading: boolean,

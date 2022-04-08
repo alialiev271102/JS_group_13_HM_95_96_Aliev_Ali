@@ -11,7 +11,7 @@ const port = 8000;
 const whitelist = ['http://localhost:4200', 'https://localhost:4200'];
 
 const corsOptions = {
-    origin: (origin, callback) => { // 'http://localhost:4200'
+    origin: (origin, callback) => {
         if (origin === undefined || whitelist.indexOf(origin) !== -1) {
             callback(null, true);
         } else {

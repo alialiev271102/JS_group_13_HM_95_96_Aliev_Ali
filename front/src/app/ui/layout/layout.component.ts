@@ -26,7 +26,7 @@ export class LayoutComponent {
     private breakpointObserver: BreakpointObserver,
     private store: Store<AppState>
   ) {
-    this.user = store.select(state => state.users.user);
+      this.user = store.select(state => state.users.user);
   }
 
   logout() {

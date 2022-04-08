@@ -60,6 +60,7 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', auth, permit('admin'), upload.single('image'), async (req, res, next) => {
     try {
+        console.log('yrdhfjghyiudgx');
         if (!req.body.title || !req.body.recipe || !req.body.ingredients) {
             return res.status(400).send({message: 'Title, recipe and ingredients are required'});
         }
@@ -76,9 +77,7 @@ router.post('/', auth, permit('admin'), upload.single('image'), async (req, res,
         if (req.file) {
             cocktailData.image = req.file.filename;
         }
-
         const cocktail = new Cocktail(cocktailData);
-
         await cocktail.save();
 
         return res.send({message: 'Created new product', id: cocktail._id});

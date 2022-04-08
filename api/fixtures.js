@@ -31,7 +31,7 @@ const run = async () => {
     }, {
         creatorUserId: 'c6or8gC8lBMVmjlwsc0wo',
         title: 'Red alcoholic cocktail',
-        image: 'Milk.jpg',
+        image: 'redAlcoholicCoctail.jpg',
         recipe: 'mix everything',
         isPublished: true,
         ingredients: [

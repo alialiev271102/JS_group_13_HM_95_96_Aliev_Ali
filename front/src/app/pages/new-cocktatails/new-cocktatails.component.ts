@@ -5,6 +5,7 @@ import {Store} from "@ngrx/store";
 import {AppState} from "../../store/types";
 import {CocktailData} from "../../models/cocktail.model";
 import {createCocktailRequest} from "../../store/cocktail.actions";
+import {User} from "../../models/user.model";
 
 @Component({
   selector: 'app-new-cocktatails',
@@ -16,15 +17,24 @@ export class NewCocktatailsComponent {
   loading: Observable<boolean>;
   error: Observable<string | null>;
   profileForm!: FormGroup;
+  creatorUserId: string;
+  user: Observable<User | null>;
 
   constructor(
     private store: Store<AppState>
   ) {
+    this.creatorUserId = '';
+    this.user = store.select(state => state.users.user);
+    this.user.subscribe(user => {
+      this.creatorUserId = user!._id;
+    })
     this.loading = store.select(state => state.cocktails.createLoading);
     this.error = store.select(state => state.cocktails.createError);
-    this.profileForm = new FormGroup({});
     this.profileForm = new FormGroup({
+      title: new FormControl('', Validators.required),
       ingredients: new FormArray([]),
+      recipe: new FormControl('', Validators.required),
+      image: new FormControl('', Validators.required),
     });
   }
 
@@ -51,7 +61,8 @@ export class NewCocktatailsComponent {
 
 
   onSubmit() {
-    const cocktailData: CocktailData = this.form.value;
+    const cocktailData: CocktailData = this.profileForm.value;
+    cocktailData.creatorUserId = this.creatorUserId;
     this.store.dispatch(createCocktailRequest({cocktailData}));
   }
 }

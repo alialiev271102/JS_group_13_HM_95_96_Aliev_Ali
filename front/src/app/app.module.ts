@@ -35,6 +35,7 @@ import { CocktatailsComponent } from './pages/cocktatails/cocktatails.component'
 import { NewCocktatailsComponent } from './pages/new-cocktatails/new-cocktatails.component';
 import { MyCocktatailsComponent } from './pages/my-cocktatails/my-cocktatails.component';
 import {ImagePipe} from "./pipes/image.pipe";
+import { OneCocktailComponent } from './pages/cocktatails/one-cocktail/one-cocktail.component';
 
 const socialConfig: SocialAuthServiceConfig = {
   autoLogin: false,
@@ -59,7 +60,8 @@ const socialConfig: SocialAuthServiceConfig = {
     CocktatailsComponent,
     NewCocktatailsComponent,
     MyCocktatailsComponent,
-    ImagePipe
+    ImagePipe,
+    OneCocktailComponent
   ],
   imports: [
     BrowserModule,

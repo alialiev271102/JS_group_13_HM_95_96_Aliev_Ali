@@ -9,7 +9,7 @@ import {
 } from "./cocktail.actions";
 
 const initialState: CocktailState = {
-  cocktails: [],
+  cocktail: [],
   fetchLoading: false,
   fetchError: null,
   createLoading: false,

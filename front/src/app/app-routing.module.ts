@@ -4,12 +4,15 @@ import {LoginComponent} from "./pages/login/login.component";
 import {RegisterComponent} from "./pages/register/register.component";
 import {CocktatailsComponent} from "./pages/cocktatails/cocktatails.component";
 import {NewCocktatailsComponent} from "./pages/new-cocktatails/new-cocktatails.component";
+import {OneCocktailComponent} from "./pages/cocktatails/one-cocktail/one-cocktail.component";
 
 const routes: Routes = [
   {path: '', component: CocktatailsComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
+  {path: 'cocktail', component: CocktatailsComponent},
   {path: 'cocktail/new', component: NewCocktatailsComponent},
+  {path: 'cocktail/:id', component: OneCocktailComponent},
 ];
 
 @NgModule({

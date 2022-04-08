@@ -29,7 +29,9 @@ export class CocktailService {
     );
   }
 
+
   createCocktail(cocktailData: CocktailData) {
+    console.log(cocktailData);
     const formData = new FormData();
     Object.keys(cocktailData).forEach(key => {
       if (cocktailData[key] !== null) {
