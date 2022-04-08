@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
-import {Observable} from "rxjs";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
+import {Observable, Subscription} from "rxjs";
 import {Cocktail} from "../../../models/cocktail.model";
 import {Store} from "@ngrx/store";
 import {AppState} from "../../../store/types";
@@ -13,8 +13,9 @@ import {environment} from "../../../../environments/environment";
   templateUrl: './one-cocktail.component.html',
   styleUrls: ['./one-cocktail.component.sass']
 })
-export class OneCocktailComponent implements OnInit {
+export class OneCocktailComponent implements OnInit, OnDestroy {
 
+  deleteSub!: Subscription;
   cocktail!: Cocktail;
   loading: Observable<boolean>;
   error: Observable<null | string>;
@@ -23,7 +24,8 @@ export class OneCocktailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private store: Store<AppState>,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) {
     this.loading = store.select(state => state.cocktails.fetchLoading);
     this.error = store.select(state => state.cocktails.fetchError);
@@ -40,6 +42,15 @@ export class OneCocktailComponent implements OnInit {
     })
 
     this.store.dispatch(fetchCocktailRequest());
+  }
+
+  OnDelete() {
+    this.deleteSub = this.http.delete(environment.apiUrl + '/cocktails/' + this.id).subscribe();
+    this.router.navigate(['/cocktail']);
+  }
+
+  ngOnDestroy() {
+    this.deleteSub.unsubscribe();
   }
 
 

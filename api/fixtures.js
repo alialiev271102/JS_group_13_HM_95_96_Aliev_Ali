@@ -46,11 +46,13 @@ const run = async () => {
     })
 
     await User.create({
+        displayName: 'Not limon',
         email: 'user@gmail.com',
         password: '12321',
         token: nanoid(),
         role: 'user'
     }, {
+        displayName: 'limon',
         email: 'limon@gmail.com',
         password: '12321',
         token: nanoid(),

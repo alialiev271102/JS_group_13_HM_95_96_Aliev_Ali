@@ -8,6 +8,7 @@ const Cocktail = require("../models/Cocktail");
 const mongoose = require("mongoose");
 const auth = require("../middleware/auth");
 const permit = require("../middleware/permit");
+const User = require("../models/User");
 
 
 const router = express.Router();
@@ -58,7 +59,7 @@ router.get('/:id', async (req, res, next) => {
     }
 });
 
-router.post('/', auth, permit('admin'), upload.single('image'), async (req, res, next) => {
+router.post('/', auth, upload.single('image'), async (req, res, next) => {
     try {
         console.log('yrdhfjghyiudgx');
         if (!req.body.title || !req.body.recipe || !req.body.ingredients) {
@@ -90,6 +91,30 @@ router.post('/', auth, permit('admin'), upload.single('image'), async (req, res,
             return res.status(400).send(e);
         }
 
+        next(e);
+    }
+});
+
+router.delete('/:id', async (req, res, next) => {
+    try {
+        const token = req.get('Authorization');
+        const message = {message: 'OK'};
+
+        if (!token) return res.send(message);
+
+        const user = await User.findOne({token});
+
+        if (!user) return res.send(message);
+
+        const cocktail = await Cocktail.deleteOne({ _id: req.params.id });
+        if (!cocktail) {
+            return res.status(404).send({message: 'Not found'});
+        }
+
+        await cocktail.save();
+
+        return res.send(message);
+    } catch (e) {
         next(e);
     }
 });

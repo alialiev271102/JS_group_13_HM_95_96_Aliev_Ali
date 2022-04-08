@@ -26,7 +26,7 @@ export class IsPublishedDirective implements OnInit, OnDestroy {
     this.userSub = this.user.subscribe(user => {
       this.viewContainer.clear();
 
-      if((!this.type.isPublished && user?._id === this.type.creatorUserId) || (this.type.creatorUserId === user?._id && user.role === 'admin') || (this.type.isPublished)) {
+      if((!this.type.isPublished && user?._id === this.type.creatorUserId) || (user?.role === 'admin') || (this.type.isPublished)) {
         this.viewContainer.createEmbeddedView(this.templateRef);
       }
     });
