@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Observable} from 'rxjs';
 import {map, shareReplay} from 'rxjs/operators';
@@ -12,7 +12,7 @@ import {logoutUserRequest} from '../../store/users.actions';
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.css']
 })
-export class LayoutComponent {
+export class LayoutComponent implements OnInit{
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -27,6 +27,12 @@ export class LayoutComponent {
     private store: Store<AppState>
   ) {
       this.user = store.select(state => state.users.user);
+  }
+
+  ngOnInit() {
+    this.user.subscribe(user => {
+      console.log(user?.avatar);
+    })
   }
 
   logout() {

@@ -32,6 +32,10 @@ const UserSchema = new mongoose.Schema({
     },
     googleId: String,
     displayName: String,
+    avatar: {
+        type: String,
+
+    }
 });
 
 const SALT_WORK_FACTOR = 10;

@@ -1,8 +1,10 @@
 export interface User {
   _id: string,
+  displayName: string,
   email: string,
   token: string,
   role: string,
+  avatar: string,
 }
 
 export interface RegisterUserData {

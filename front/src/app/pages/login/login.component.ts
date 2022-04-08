@@ -42,12 +42,15 @@ export class LoginComponent implements OnInit, OnDestroy {
         authToken: user.authToken,
         id: user.id,
         email: user.email,
-        name: user.firstName,
-        access_token: user.response.access_token
+        name: user.name,
+        access_token: user.response.access_token,
+        avatar: user.photoUrl
       }).subscribe(user => {
         this.store.dispatch(loginUserSuccess({user}));
       });
+      console.log(user);
     });
+
   }
 
   googleLogin() {

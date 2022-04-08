@@ -24,8 +24,5 @@ export class CocktatailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(fetchCocktailRequest());
-    this.cocktails.subscribe(user => {
-      console.log(user);
-    })
   }
 }
