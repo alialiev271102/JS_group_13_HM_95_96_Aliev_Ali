@@ -17,7 +17,7 @@
 ></mat-progress-spinner>
 
 <ng-template #cocktailsArea>
-  <div fxLayout="row wrap" fxLayoutGap="16px grid">
+  <div fxLayout="row wrap" fxLayoutGap="16px grid" >
     <div
       fxFlex.xs="100%"
       fxFlex.sm="50%"
@@ -25,7 +25,7 @@
       fxFlex="25%"
       *ngFor="let cocktail of cocktails | async"
     >
-      <mat-card>
+      <mat-card *appIsPublished="cocktail">
         <mat-card-title>{{ cocktail.title }}</mat-card-title>
         <img
           [src]="cocktail.image | image"

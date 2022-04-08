@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {Observable, Subscription} from "rxjs";
+import {Observable} from "rxjs";
 import {Cocktail} from "../../../models/cocktail.model";
 import {Store} from "@ngrx/store";
 import {AppState} from "../../../store/types";
 import {fetchCocktailRequest} from "../../../store/cocktail.actions";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-one-cocktail',
@@ -13,13 +15,16 @@ import {fetchCocktailRequest} from "../../../store/cocktail.actions";
 })
 export class OneCocktailComponent implements OnInit {
 
-  cocktails: Observable<Cocktail[]>;
+  cocktail!: Cocktail;
   loading: Observable<boolean>;
   error: Observable<null | string>;
   id!: string;
 
-  constructor(private route: ActivatedRoute, private store: Store<AppState>) {
-    this.cocktails = store.select(state => state.cocktails.cocktail);
+  constructor(
+    private route: ActivatedRoute,
+    private store: Store<AppState>,
+    private http: HttpClient
+  ) {
     this.loading = store.select(state => state.cocktails.fetchLoading);
     this.error = store.select(state => state.cocktails.fetchError);
   }
@@ -28,6 +33,12 @@ export class OneCocktailComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id = params['id'];
     })
+
+    const sss = this.http.get<Cocktail>(environment.apiUrl + '/cocktails/' + this.id);
+    sss.subscribe(sss => {
+      this.cocktail = sss;
+    })
+
     this.store.dispatch(fetchCocktailRequest());
   }
 

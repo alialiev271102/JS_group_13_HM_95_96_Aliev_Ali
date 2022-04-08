@@ -8,27 +8,20 @@
 ></mat-progress-spinner>
 
 <ng-template #cocktailsArea>
-  <div fxLayout="row wrap" fxLayoutGap="16px grid">
-    <div
-      *ngFor="let cocktail of cocktails | async"
-    >
-      <mat-card *ngIf="cocktail.id == id">
-        <mat-card-title>{{ cocktail.title }}</mat-card-title>
-        <img
-          [src]="cocktail.image | image"
-          [alt]="'Photo of ' + cocktail.title"
-          mat-card-image
-        />
-        <mat-card-content>
-          <p>Recipe: {{ cocktail.recipe }}</p>
-        </mat-card-content>
-        <mat-card-content>
-          <div *ngFor="let ing of cocktail.ingredients">
-            <p>Ingredient: {{ ing.name }} X {{ ing.amount }}</p>
-          </div>
-        </mat-card-content>
-        <mat-divider></mat-divider>
-      </mat-card>
+  <h1>{{ cocktail.title }}</h1>
+  <div
+  fxLayout="row"
+  style="margin-bottom: 40px"
+  >
+    <img [src]="cocktail.image | image" [alt]="'Photo of' + cocktail.title" style="width: 60%">
+    <div>
+      <h2 style="margin-left: 20px">Ingredients:</h2>
+      <ul>
+        <li *ngFor="let ing of cocktail.ingredients">{{ ing.name }} - {{ ing.amount }}</li>
+      </ul>
     </div>
   </div>
+  <p><strong>Recipe:</strong> {{ cocktail.recipe }}</p>
+
+
 </ng-template>

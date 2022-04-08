@@ -36,6 +36,7 @@ import { NewCocktatailsComponent } from './pages/new-cocktatails/new-cocktatails
 import { MyCocktatailsComponent } from './pages/my-cocktatails/my-cocktatails.component';
 import {ImagePipe} from "./pipes/image.pipe";
 import { OneCocktailComponent } from './pages/cocktatails/one-cocktail/one-cocktail.component';
+import { IsPublishedDirective } from './directives/is-published.directive';
 
 const socialConfig: SocialAuthServiceConfig = {
   autoLogin: false,
@@ -55,13 +56,14 @@ const socialConfig: SocialAuthServiceConfig = {
     FileInputComponent,
     RegisterComponent,
     CenteredCardComponent,
-    UserTypeDirective,
-    HasRolesDirective,
     CocktatailsComponent,
     NewCocktatailsComponent,
     MyCocktatailsComponent,
     ImagePipe,
-    OneCocktailComponent
+    OneCocktailComponent,
+    UserTypeDirective,
+    HasRolesDirective,
+    IsPublishedDirective
   ],
   imports: [
     BrowserModule,
