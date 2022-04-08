@@ -15,7 +15,7 @@ import {UserTypeDirective} from './directives/user-type.directive';
 import {HasRolesDirective} from './directives/has-roles.directive';
 import {LoginComponent} from './pages/login/login.component';
 import {FileInputComponent} from './ui/file-input/file-input.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {MatCardModule} from "@angular/material/card";
@@ -31,6 +31,10 @@ import {RegisterComponent} from './pages/register/register.component';
 import {CenteredCardComponent} from './ui/centered-card/centered-card.component';
 import {AuthInterceptor} from "./auth.interceptor";
 import {environment} from "../environments/environment";
+import { CocktatailsComponent } from './pages/cocktatails/cocktatails.component';
+import { NewCocktatailsComponent } from './pages/new-cocktatails/new-cocktatails.component';
+import { MyCocktatailsComponent } from './pages/my-cocktatails/my-cocktatails.component';
+import {ImagePipe} from "./pipes/image.pipe";
 
 const socialConfig: SocialAuthServiceConfig = {
   autoLogin: false,
@@ -51,11 +55,16 @@ const socialConfig: SocialAuthServiceConfig = {
     RegisterComponent,
     CenteredCardComponent,
     UserTypeDirective,
-    HasRolesDirective
+    HasRolesDirective,
+    CocktatailsComponent,
+    NewCocktatailsComponent,
+    MyCocktatailsComponent,
+    ImagePipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     FormsModule,
     FlexLayoutModule,

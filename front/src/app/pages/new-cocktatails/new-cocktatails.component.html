@@ -1,0 +1,80 @@
+<h1>New product</h1>
+<mat-card>
+  <mat-card-content>
+    <div class="error" *ngIf="error | async">
+      {{ error | async }}
+    </div>
+    <form (ngSubmit)="onSubmit()" #f="ngForm" fxLayout="column">
+      <mat-form-field appearance="outline">
+        <mat-label>Title</mat-label>
+        <input name="title" required matInput ngModel/>
+      </mat-form-field>
+
+      <div
+        [formGroup]="profileForm">
+        <div
+          class="form-group"
+          formArrayName="ingredients"
+        >
+          <mat-label>Ingredients</mat-label>
+          <button
+            type="button"
+            class="mat-select"
+            (click)="addIng()"
+            mat-raised-button
+          >Add ingredients
+          </button>
+          <div *ngFor="let _ of getIngControls(); let i = index">
+            <div [formGroupName]="i">
+              <mat-form-field appearance="outline">
+                <mat-label>Name</mat-label>
+                <input
+                  type="text"
+                  formControlName="name"
+                  id="name"
+                  name="name"
+                  required
+                  matInput
+                />
+              </mat-form-field>
+              <mat-form-field appearance="outline" style="margin-left: 10px">
+                <mat-label>Amount</mat-label>
+                <input
+                  type="text"
+                  formControlName="amount"
+                  id="amount"
+                  name="amount"
+                  required
+                  matInput
+                />
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <mat-form-field appearance="outline">
+        <mat-label>Recipe</mat-label>
+        <input
+          type="textarea"
+          name="price"
+          required
+          ngModel
+          matInput/>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Image</mat-label>
+        <app-file-input name="image" ngModel></app-file-input>
+      </mat-form-field>
+      <div>
+        <button
+          type="submit"
+          mat-raised-button
+          color="primary"
+          [disabled]="f.invalid || (loading | async)"
+        >SAVE
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

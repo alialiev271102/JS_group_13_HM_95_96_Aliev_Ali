@@ -1,2 +1,6 @@
 .idea
 node_modules
+public/uploads/*
+!public/uploads/.gitkeep
+!public/uploads/Milk.jpg
+!public/uploads/redAlcoholicCoctail.jpg
