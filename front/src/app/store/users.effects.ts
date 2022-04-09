@@ -43,7 +43,7 @@ export class UsersEffects {
       map(user => loginUserSuccess({user})),
       tap(() => {
         this.helpers.openSnackbar('Login successful');
-        void this.router.navigate(['/']);
+        void this.router.navigate(['/cocktail']);
       }),
       this.helpers.catchServerError(loginUserFailure)
     ))
@@ -55,7 +55,7 @@ export class UsersEffects {
       return this.usersService.logout().pipe(
         map(() => logoutUser()),
         tap(() => {
-          void this.router.navigate(['/']);
+          void this.router.navigate(['/cocktail']);
           this.helpers.openSnackbar('Logout successful');
         })
       );

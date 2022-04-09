@@ -39,6 +39,7 @@ import {IsPublishedDirective} from './directives/is-published.directive';
 import {AvatarPipe} from "./pipes/avatar.pipe";
 import {DeleteDirective} from "./directives/delete.directive";
 import {MyCocktailsComponent} from './pages/my-cocktails/my-cocktails.component';
+import {MyCoctailDirective} from "./directives/my-coctail.directive";
 
 const socialConfig: SocialAuthServiceConfig = {
   autoLogin: false,
@@ -67,6 +68,7 @@ const socialConfig: SocialAuthServiceConfig = {
     HasRolesDirective,
     IsPublishedDirective,
     DeleteDirective,
+    MyCoctailDirective,
     MyCocktailsComponent
   ],
   imports: [

@@ -9,9 +9,9 @@ import {MyCocktailsComponent} from "./pages/my-cocktails/my-cocktails.component"
 
 const routes: Routes = [
   {path: '', component: CocktatailsComponent},
+  {path: 'cocktail', component: CocktatailsComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'cocktail', component: CocktatailsComponent},
   {path: 'cocktail/new', component: NewCocktatailsComponent},
   {path: 'cocktail/myCocktails', component: MyCocktailsComponent},
   {path: 'cocktail/:id', component: OneCocktailComponent},

@@ -28,6 +28,14 @@
       (click)="OnDelete()"
       *appDelete ="cocktail"
     >Delete</button>
+    <div *appIsPublished="cocktail else pubBtn"></div>
+    <ng-template #pubBtn>
+      <button
+        mat-button
+        (click)="onPublish()"
+        *appHasRoles="['admin']"
+      >Public</button>
+    </ng-template>
   </mat-card-actions>
 
 

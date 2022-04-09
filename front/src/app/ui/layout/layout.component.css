@@ -21,6 +21,10 @@
   text-decoration: none;
 }
 
+mat-sidenav a {
+  margin: 10px 0;
+}
+
 .content {
   padding: 16px;
 }

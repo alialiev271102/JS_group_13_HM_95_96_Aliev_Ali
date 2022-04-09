@@ -8,6 +8,7 @@ const Cocktail = require("../models/Cocktail");
 const mongoose = require("mongoose");
 const auth = require("../middleware/auth");
 const User = require("../models/User");
+const permit = require("../middleware/permit");
 
 
 const router = express.Router();
@@ -105,6 +106,30 @@ router.post('/', auth, upload.single('image'), async (req, res, next) => {
     }
 });
 
+router.post('/update', auth, permit('admin'), async(req, res, next) => {
+    try{
+        const token = req.get('Authorization');
+        const message = {message: 'OK'};
+
+        if (!token) return res.send(message);
+
+        const user = await User.findOne({token});
+
+        if (!user) return res.send(message);
+
+        const cocktail = await Cocktail.updateOne({_id: req.body._id}, {isPublished: true});
+
+        if (!cocktail) {
+            return res.status(404).send({message: 'Not found'});
+        }
+
+        return res.send(cocktail);
+
+    } catch (e) {
+        next(e);
+    }
+})
+
 router.delete('/:id', async (req, res, next) => {
     try {
         const token = req.get('Authorization');
@@ -121,7 +146,6 @@ router.delete('/:id', async (req, res, next) => {
             return res.status(404).send({message: 'Not found'});
         }
 
-        await cocktail.save();
 
         return res.send(message);
     } catch (e) {

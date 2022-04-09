@@ -13,6 +13,8 @@ export class IsPublishedDirective implements OnInit, OnDestroy {
   userSub!: Subscription;
 
   @Input("appIsPublished") type!: Cocktail;
+  @Input("appIsPublishedElse") elseTemplate?: TemplateRef<any>;
+
 
   constructor(
     private templateRef: TemplateRef<any>,
@@ -26,8 +28,10 @@ export class IsPublishedDirective implements OnInit, OnDestroy {
     this.userSub = this.user.subscribe(user => {
       this.viewContainer.clear();
 
-      if((!this.type.isPublished && user?._id === this.type.creatorUserId) || (user?.role === 'admin') || (this.type.isPublished)) {
+      if((this.type.isPublished)) {
         this.viewContainer.createEmbeddedView(this.templateRef);
+      }else if (this.elseTemplate && !this.type.isPublished && ((user?._id === this.type.creatorUserId) || (user?.role === 'admin'))) {
+        this.viewContainer.createEmbeddedView(this.elseTemplate);
       }
     });
   }

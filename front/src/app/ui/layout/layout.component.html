@@ -5,9 +5,9 @@
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="#">Link 1</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
+      <a mat-list-item href="https://www.youtube.com/watch?v=c6GV_vRlIIA" target="_blank">10 Easy Cocktails To Make At Home</a>
+      <a mat-list-item href="https://www.youtube.com/watch?v=b0IuTL3Z-kk" target="_blank">How To Mix Every Cocktail</a>
+      <a mat-list-item href="https://www.youtube.com/watch?v=J4BkIAV9SmI" target="_blank">Dancing PEPE</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -30,7 +30,7 @@
       </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item disabled>{{ (user | async)?.email }}</button>
-        <button mat-menu-item routerLink="/cocktail/myCocktails?creatorUserId={{ (user | async)?._id}}">My Cocktails</button>
+        <button mat-menu-item routerLink="/cocktail/myCocktails">My Cocktails</button>
         <button mat-menu-item (click)="logout()">Logout</button>
       </mat-menu>
       </nav>

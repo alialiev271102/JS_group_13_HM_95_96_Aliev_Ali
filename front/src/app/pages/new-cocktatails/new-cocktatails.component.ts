@@ -1,6 +1,6 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {FormArray, FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
-import {Observable} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import {Store} from "@ngrx/store";
 import {AppState} from "../../store/types";
 import {CocktailData} from "../../models/cocktail.model";
@@ -12,20 +12,21 @@ import {User} from "../../models/user.model";
   templateUrl: './new-cocktatails.component.html',
   styleUrls: ['./new-cocktatails.component.sass']
 })
-export class NewCocktatailsComponent {
+export class NewCocktatailsComponent implements OnDestroy{
   @ViewChild('f') form!: NgForm;
   loading: Observable<boolean>;
   error: Observable<string | null>;
   profileForm!: FormGroup;
   creatorUserId: string;
   user: Observable<User | null>;
+  userSub: Subscription;
 
   constructor(
     private store: Store<AppState>
   ) {
     this.creatorUserId = '';
     this.user = store.select(state => state.users.user);
-    this.user.subscribe(user => {
+    this.userSub = this.user.subscribe(user => {
       this.creatorUserId = user!._id;
     })
     this.loading = store.select(state => state.cocktails.createLoading);
@@ -65,5 +66,9 @@ export class NewCocktatailsComponent {
     cocktailData.ingredients = JSON.stringify(cocktailData.ingredients);
     cocktailData.creatorUserId = this.creatorUserId;
     this.store.dispatch(createCocktailRequest({cocktailData}));
+  }
+
+  ngOnDestroy() {
+    this.userSub.unsubscribe();
   }
 }

@@ -16,7 +16,7 @@
   mode="indeterminate"
 ></mat-progress-spinner>
 
-<ng-template #cocktailsArea>
+<ng-template #cocktailsArea >
   <div fxLayout="row wrap" fxLayoutGap="16px grid" >
     <div
       fxFlex.xs="100%"
@@ -25,24 +25,47 @@
       fxFlex="25%"
       *ngFor="let cocktail of cocktails | async"
     >
-      <mat-card *appIsPublished="cocktail">
-        <mat-card-title>{{ cocktail.title }}</mat-card-title>
-        <img
-          [src]="cocktail.image | image"
-          [alt]="'Photo of ' + cocktail.title"
-          mat-card-image
-        />
-        <mat-card-content>
-          <p>Recipe: {{ cocktail.recipe }}</p>
-        </mat-card-content>
-        <mat-divider></mat-divider>
-        <mat-card-actions>
-          <a
-            [routerLink]="['/cocktail/', cocktail.id]"
-            mat-button
-          >VIEW</a>
-        </mat-card-actions>
-      </mat-card>
+      <div *appMyCocktail="cocktail">
+        <mat-card *appIsPublished="cocktail else cocktailCard">
+          <mat-card-title>{{ cocktail.title }}</mat-card-title>
+          <img
+            [src]="cocktail.image | image"
+            [alt]="'Photo of ' + cocktail.title"
+            mat-card-image
+          />
+          <mat-card-content>
+            <p>Recipe: {{ cocktail.recipe }}</p>
+          </mat-card-content>
+          <mat-divider></mat-divider>
+          <mat-card-actions>
+            <a
+              [routerLink]="['/cocktail/', cocktail.id]"
+              mat-button
+            >VIEW</a>
+          </mat-card-actions>
+        </mat-card>
+        <ng-template #cocktailCard>
+          <mat-card>
+            <mat-card-title>{{ cocktail.title }}</mat-card-title>
+            <img
+              [src]="cocktail.image | image"
+              [alt]="'Photo of ' + cocktail.title"
+              mat-card-image
+            />
+            <mat-card-content>
+              <p>Recipe: {{ cocktail.recipe }}</p>
+            </mat-card-content>
+            <mat-divider></mat-divider>
+            <mat-card-actions>
+              <a
+                [routerLink]="['/cocktail/', cocktail.id]"
+                mat-button
+              >VIEW</a>
+            </mat-card-actions>
+            <span style="color: grey">Этот коктель на расмотрении модератора</span>
+          </mat-card>
+        </ng-template>
+      </div>
     </div>
   </div>
 </ng-template>

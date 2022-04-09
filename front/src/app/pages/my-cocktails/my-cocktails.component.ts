@@ -27,5 +27,8 @@ export class MyCocktailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(fetchCocktailRequest());
+    this.cocktails.subscribe( cocktail => {
+      console.log(cocktail);
+    })
   }
 }

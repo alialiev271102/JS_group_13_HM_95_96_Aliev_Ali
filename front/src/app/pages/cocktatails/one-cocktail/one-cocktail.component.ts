@@ -16,11 +16,13 @@ import {environment} from "../../../../environments/environment";
 export class OneCocktailComponent implements OnInit, OnDestroy {
 
   deleteSub!: Subscription;
+  pubSub!: Subscription;
   cocktail!: Cocktail;
   loading: Observable<boolean>;
   error: Observable<null | string>;
   id!: string;
   flag!: boolean
+  flag2!: boolean
 
   constructor(
     private route: ActivatedRoute,
@@ -37,24 +39,29 @@ export class OneCocktailComponent implements OnInit, OnDestroy {
       this.id = params['id'];
     })
     this.flag = false;
-
-    const sss = this.http.get<Cocktail>(environment.apiUrl + '/cocktails/' + this.id);
-    sss.subscribe(sss => {
-      this.cocktail = sss;
+    this.flag2 = false;
+    this.http.get<Cocktail>(environment.apiUrl + '/cocktails/' + this.id).subscribe(cocktail => {
+      this.cocktail = cocktail;
     })
 
     this.store.dispatch(fetchCocktailRequest());
   }
 
   OnDelete() {
-    this.deleteSub = this.http.delete(environment.apiUrl + '/cocktails/' + this.id).subscribe(() => {
-      this.flag = true;
-    });
+    this.flag = true;
+    this.deleteSub = this.http.delete(environment.apiUrl + '/cocktails/' + this.id).subscribe();
+    void this.router.navigate(['/cocktail']);
+  }
+
+  onPublish() {
+    this.flag2 = true;
+    this.pubSub = this.http.post(environment.apiUrl + '/cocktails/update', this.cocktail).subscribe();
     void this.router.navigate(['/cocktail']);
   }
 
   ngOnDestroy() {
     if (this.flag)this.deleteSub.unsubscribe();
+    if (this.flag2)this.pubSub.unsubscribe();
   }
 
 
